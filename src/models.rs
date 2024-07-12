@@ -11,13 +11,6 @@ pub struct User {
     pub balance: f64,
 }
 
-#[derive(Insertable, Deserialize)]
-#[table_name = "users"]
-pub struct NewUser {
-    pub username: String,
-    pub password: String,
-}
-
 #[derive(Deserialize)]
 pub struct LoginUser {
     pub username: String,
@@ -25,15 +18,10 @@ pub struct LoginUser {
 }
 
 #[derive(Deserialize)]
-pub struct ProfilePayload {
+pub struct Token {
     pub token: String,
 }
 
-#[derive(Serialize, Deserialize)]
-pub struct AuthPayload {
-    pub sub: String,
-    pub exp: usize,
-}
 
 #[derive(Queryable, Serialize)]
 pub struct Transaction {
@@ -42,6 +30,19 @@ pub struct Transaction {
     pub amount: f64,
     pub description: String,
     pub created_at: chrono::NaiveDateTime,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct AuthPayload {
+    pub sub: String,
+    pub exp: usize,
+}
+
+#[derive(Insertable, Deserialize)]
+#[table_name = "users"]
+pub struct NewUser {
+    pub username: String,
+    pub password: String,
 }
 
 #[derive(Insertable, Deserialize)]

@@ -2,7 +2,7 @@ use actix_web::{web, HttpResponse};
 use diesel::prelude::*;
 use uuid::Uuid;
 use bcrypt::{hash, verify};
-use crate::models::{User, NewUser, LoginUser, ProfilePayload};
+use crate::models::{User, NewUser, LoginUser, Token};
 use crate::schema::users::dsl::*;
 use crate::utils::{create_jwt, decode_jwt};
 use crate::DbPool;
@@ -56,7 +56,7 @@ pub async fn login_user(state: web::Data<AppState>, login: web::Json<LoginUser>)
     }
 }
 
-pub async fn get_user_profile(state: web::Data<AppState>, payload: web::Json<ProfilePayload>) -> HttpResponse {
+pub async fn get_user_profile(state: web::Data<AppState>, payload: web::Json<Token>) -> HttpResponse {
     let mut conn = state.pool.get().expect("Couldn't get db connection from pool");
     let token = &payload.token;
     let claims = decode_jwt(token, &state.secret_key);
@@ -66,6 +66,5 @@ pub async fn get_user_profile(state: web::Data<AppState>, payload: web::Json<Pro
     HttpResponse::Ok().json(json!({
         "msg": "SUCCESS",
         "data": user
-    }));
-    HttpResponse::Ok().finish()
+    }))
 }
