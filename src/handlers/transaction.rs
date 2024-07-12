@@ -1,7 +1,6 @@
 use actix_web::{web, HttpResponse};
 use diesel::prelude::*;
 use uuid::Uuid;
-use chrono::Utc;
 use crate::models::{Transaction, NewTransaction};
 use crate::schema::transactions::dsl::*;
 use crate::utils::decode_jwt;

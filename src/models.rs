@@ -24,6 +24,11 @@ pub struct LoginUser {
     pub password: String,
 }
 
+#[derive(Deserialize)]
+pub struct ProfilePayload {
+    pub token: String,
+}
+
 #[derive(Serialize, Deserialize)]
 pub struct AuthPayload {
     pub sub: String,
