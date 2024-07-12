@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: dodouser
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dodo_payments
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  db-data:

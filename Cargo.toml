@@ -1,0 +1,25 @@
+[package]
+name = "dodo_payments"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+actix-web = "4"
+actix-rt = "2"
+actix-identity = "0.4"
+actix-cors = "0.6"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1", features = ["v4", "serde"] }
+dotenv = "0.15"
+diesel = { version = "2.0.0", features = ["postgres", "r2d2", "uuid", "chrono"] }
+jsonwebtoken = "8"
+log = "0.4"
+env_logger = "0.9"
+bcrypt = "0.11"
+chrono = {version = "0.4.38", features = ["serde"]}
+
+
+[dev-dependencies]
+actix-web = "4"
+diesel_migrations = "2.0"
